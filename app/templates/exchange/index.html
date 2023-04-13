@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="form-wrap">
+        <h3>Valyutalar kursi</h3>
+
+        <div class="content">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form">
+                    <input type="number" name="form-amount" placeholder="Summa" class="form-control">
+                    <select name="from-curr" class="form-control" value="{{ from_curr }}">
+                        {% for cur in currencies %}}
+                        <option value="{{ cur }}">
+                            {{ cur }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+                    <select name="to-curr" class="form-control" value="{{ to_curr }}">
+                        {% for cur in currencies %}}
+                        <option value="{{ cur }}">
+                            {{ cur }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <hr>
+                {% if converted_amount %}
+                <div class="card">
+                    <div class="card-header">
+                        <h5><b>{{ from_curr }}</b>dan <b>{{ to_curr }}</b> pul birligiga o'tsa</h5>
+                    </div>
+                    <div class="card-body">
+                        {{ converted_amount }}
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="submit-btn">
+                    <button>Hisoblash</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
