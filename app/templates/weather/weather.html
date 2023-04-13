@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="wrap">
+    <div class="block">
+        <div class="elem">
+            <h2>Shaxringizdagi ob-havo</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.name }}
+                <input type="text" name="city" placeholder="Shaxringizni kiriting" class="city">
+                <br>
+                <input type="submit" name="send" value="Qidirish" class="but">
+            </form>
+        </div>
+        <div class="elem">
+            <h2>Ma'lumotlar</h2>
+            {% for info in all_info %}
+            <div class="info">
+                <p class="data">
+                    <b>Shaxar:</b> {{ info.city }} <br><br>
+                    <b>Temperatura:</b> {{ info.temp }}<sup>o</sup>
+                </p>
+                <p><img src="{{ info.icon }}" alt=""></p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

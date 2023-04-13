@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+    <div class="menu">
+        <ul>
+            <li><a href="{% url 'index' %}">Valyutalar kursi</a></li>
+            <li><a href="{% url 'weather' %}">Ob-havo</a></li>
+        </ul>
+    </div>
     {% block content %}
 
     {% endblock %}
