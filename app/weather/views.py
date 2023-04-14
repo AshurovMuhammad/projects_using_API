@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 import requests
 from .models import City
 from .forms import CityForm
@@ -23,12 +23,14 @@ def weather(request):
 
         try:
             city_info = {
+                'city_pk': city.id,
                 'city': city.name,
                 'temp': res["current"]["temp_c"],
                 'icon': res["current"]['condition']['icon']
             }
         except KeyError:
             city_info = {
+                'city_pk': city.id,
                 'city': "Bunday shaxar topilmadi",
                 'temp': "-",
             }
@@ -39,3 +41,10 @@ def weather(request):
         'form': form
     }
     return render(request, template_name='weather/weather.html', context=context)
+
+
+def deletecity(request, city_pk):
+    city = get_object_or_404(City, pk=city_pk)
+    if request.method == "POST":
+        city.delete()
+        return redirect('weather')
